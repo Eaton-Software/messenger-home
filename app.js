@@ -6,12 +6,7 @@ var winston = require('winston');
 var expressWinston = require('express-winston');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
-var passport = require('passport');
-var SpotifyStrategy = require('passport-spotify').Strategy;
 
-var keys = require('./keys');
-var routes = require('./routes/index');
 var fb = require('./routes/fb');
 
 var app = express();
@@ -52,18 +47,8 @@ app.use(expressWinston.logger({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session(
-  { secret: 'keyboard cat',
-    saveUninitialized: false,
-    resave: false }
-));
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
 app.use('/bot', fb);
 
 app.use(expressWinston.errorLogger({
@@ -99,26 +84,6 @@ app.use(function(err, req, res, next) { // eslint-disable-line no-unused-vars
     message: err.message,
     error: {}
   });
-});
-
-
-passport.use(new SpotifyStrategy({
-  clientID: keys.SPOTIFY_ID,
-  clientSecret: keys.SPOTIFY_SECRET,
-  callbackURL: keys.SPOTIFY_CB
-},
-function(accessToken, refreshToken, profile, done) {
-  profile.accessToken = accessToken;
-  profile.refreshToken = refreshToken;
-  return done(null, profile);
-}));
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
 });
 
 
