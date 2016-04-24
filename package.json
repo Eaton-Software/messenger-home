@@ -1,9 +1,15 @@
 {
   "name": "hackdfw16",
   "version": "0.1.0",
+  "authors": [
+    "Tim Hung <thung1@binghamton.edu",
+    "William Jagels <will.jagels@gmail.com>",
+    "Nikolas Vanderhoof <nvander1@binghamton.edu"
+  ],
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "lint": "gulp lint",
     "test": "exit 0"
   },
   "dependencies": {
@@ -24,5 +30,12 @@
     "spotify-web-api-node": "^2.3.0",
     "webcamjs": "^1.0.6",
     "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.8.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.4.5"
   }
 }
