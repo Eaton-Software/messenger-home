@@ -13,4 +13,4 @@ module.exports = {
     'STATE': ['i am', 'i\'m', 'im '],
     'CAM': ['cam', 'camera', 'pic', 'picture', 'see', 'film']
   }
-}
+};

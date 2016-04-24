@@ -1,0 +1,24 @@
+{
+  "name": "messenger-home",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Tim Hung <thung1@binghamton.edu",
+    "William Jagels <will.jagels@gmail.com>",
+    "Nikolas Vanderhoof <nvander1@binghamton.edu"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Eaton-Software/messenger-home",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webcamjs": "^1.0.6",
+    "Materialize": "materialize#^0.97.6"
+  }
+}

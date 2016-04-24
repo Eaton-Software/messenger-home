@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "4.2" # LTS
+  - "stable"
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+cache:
+  directories:
+    - node_modules
+after_success:
+    - npm run lint
+   #- bithound check git@github.com:Eaton-Software/messenger-home.git
