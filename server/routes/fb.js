@@ -264,11 +264,15 @@ router.post('/webhook/', function (req, res) {
         break;
       case 'cam':
         var num = text.match(/\d+/);
-        sendText(sender, 'Here\'s your picture!');
-        if(has(text, 'all')) {
-          sendAllCams(sender, num);
+        if(!num) {
+          sendText(sender, 'Please specify a valid camera');
         } else {
-          sendImage(sender, 'https://fb.jagels.us/shot'+num[0]+'.jpg');
+          sendText(sender, 'Here\'s your picture!');
+          if(has(text, 'all')) {
+            sendAllCams(sender, num);
+          } else {
+            sendImage(sender, 'https://fb.jagels.us/shot'+num[0]+'.jpg');
+          }
         }
         break;
       case 'state':
