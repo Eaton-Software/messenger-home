@@ -22,5 +22,3 @@ A bot created with the Facebook messenger API that helps automate your home.
 - johnny-five
 - MPU-6050
 
-----
-## Changelog Version 0.1.0
