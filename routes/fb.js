@@ -44,138 +44,47 @@ router.get('/webhook/', function (req, res) {
   res.send('Error, wrong token');
 });
 
+
+
+
+/////////////////////////
+// Messaging Functions //
+/////////////////////////
+
+function sendMessage(messageData, sender) {
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData
+    }
+  }, function(error, response, body) {
+    if (error) {
+      logger.error('Error sending messages: ', error);
+    } else if (response.body.error) {
+      logger.error('Error: ', body.error);
+    }
+  });
+}
+
 function sendText(sender, text) {
   var messageData = {text:text};
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData
-    }
-  }, function(error, response, body) {
-    if (error) {
-      logger.error('Error sending messages: ', error);
-    } else if (response.body.error) {
-      logger.error('Error: ', body.error);
-    }
-  });
+  sendMessage(messageData, sender);
 }
 
-function sendGeneric(sender) {
-  logger.info('Displaying generic message...');
-  var messageData = {
-    'attachment': {
-      'type': 'template',
-      'payload': {
-        'template_type': 'generic',
-        'elements': [
-          {
-            'title': 'First card',
-            'subtitle': 'Element #1 of an hscroll',
-            'image_url': 'http://messengerdemo.parseapp.com/img/rift.png',
-            'buttons': [
-              {
-                'type': 'web_url',
-                'url': 'https://www.messenger.com',
-                'title': 'web url'
-              },
-              {
-                'type': 'postback',
-                'title': 'Postback',
-                'payload': 'Payload for first element in a generic bubble'
-              }
-            ]
-          },
-          {
-            'title': 'Second card',
-            'subtitle': 'Element #2 of an hscroll',
-            'image_url': 'http://messengerdemo.parseapp.com/img/gearvr.png',
-            'buttons': [{
-              'type': 'postback',
-              'title': 'Postback',
-              'payload': 'Payload for second element in a generic bubble'
-            }]
-          }
-        ]
-      }
-    }
-  };
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData
-    }
-  }, function(error, response, body) {
-    if (error) {
-      logger.error('Error sending messages: ', error);
-    } else if (response.body.error) {
-      logger.error('Error: ', body.error);
-    }
-  });
-}
-
-var recTemp = 'null';
-function sendTemperature(sender) {
-  logger.info('Displaying temperature...');
-  var messageData = {
-    'attachment': {
-      'type': 'template',
-      'payload': {
-        'template_type': 'generic',
-        'elements': [{
-          'title': 'Current Temperature',
-          'subtitle': recTemp + ' °F'
-        }]
-      }
-    }
-  };
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData
-    }
-  }, function(error, response, body) {
-    if (error) {
-      logger.error('Error sending messages: ', error);
-    } else if (response.body.error) {
-      logger.error('Error: ', body.error);
-    }
-  });
-}
-
-function sendImage(sender, imageURL) {
+function sendCam(sender, cam) {
   logger.info('Sending image...');
   var messageData = {
     'attachment': {
       'type': 'image',
       'payload': {
-        'url': imageURL
+        'url': 'https://fb.jagels.us/shot'+ cam +'.jpg'
       }
     }
   };
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData
-    }
-  }, function(error, response, body) {
-    if (error) {
-      logger.error('Error sending messages: ', error);
-    } else if (response.body.error) {
-      logger.error('Error: ', body.error);
-    }
-  });
+  sendMessage(messageData, sender);
 }
 
 function sendAllCams(sender, arr) {
@@ -196,23 +105,75 @@ function sendAllCams(sender, arr) {
       }
     }
   };
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData
-    }
-  }, function(error, response, body) {
-    if (error) {
-      logger.error('Error sending messages: ', error);
-    } else if (response.body.error) {
-      logger.error('Error: ', body.error);
-    }
-  });
+  sendMessage(messageData, sender);
 }
 
+var recTemp = 'null';
+function sendTemperature(sender) {
+  logger.info('Displaying temperature...');
+  var messageData = {
+    'attachment': {
+      'type': 'template',
+      'payload': {
+        'template_type': 'generic',
+        'elements': [{
+          'title': 'Current Temperature',
+          'subtitle': recTemp + ' °F'
+        }]
+      }
+    }
+  };
+  sendMessage(messageData, sender);
+}
+
+function sendGeneric(sender) {
+  logger.info('Displaying generic message...');
+  var messageData = {
+    'attachment': {
+      'type': 'template',
+      'payload': {
+        'template_type': 'generic',
+        'elements': [{
+          'title': 'First card',
+          'subtitle': 'Element #1 of an hscroll',
+          'image_url': 'http://messengerdemo.parseapp.com/img/rift.png',
+          'buttons': [
+            {
+              'type': 'web_url',
+              'url': 'https://www.messenger.com',
+              'title': 'web url'
+            },
+            {
+              'type': 'postback',
+              'title': 'Postback',
+              'payload': 'Payload for first element in a generic bubble'
+            }
+          ]
+        },
+          {
+            'title': 'Second card',
+            'subtitle': 'Element #2 of an hscroll',
+            'image_url': 'http://messengerdemo.parseapp.com/img/gearvr.png',
+            'buttons': [{
+              'type': 'postback',
+              'title': 'Postback',
+              'payload': 'Payload for second element in a generic bubble'
+            }]
+          }
+        ]
+      }
+    }
+  };
+  sendMessage(messageData, sender);
+}
+
+
+
+
+
+/////////////////////////
+// Language Processing //
+/////////////////////////
 function has(msg, sub) {
   var index = msg.toLowerCase().indexOf(sub);
   if(index >= 0) {
@@ -232,11 +193,11 @@ function hasArr(msg, arr) {
 
 function assessPrompt(msg) {
   if(has(msg, 'help')) return 'help';
-  if(msg === 'Generic') return 'generic';
-  if(hasArr(msg, s.words.GREET)) return 'greet';
-  if(hasArr(msg, s.words.STATE)) return 'state';
   if(hasArr(msg, s.words.CAM)) return 'cam';
   if(hasArr(msg, s.words.DISPLAY) && hasArr(msg, s.words.TEMPERATURE)) return 'temperature';
+  if(hasArr(msg, s.words.STATE)) return 'state';
+  if(hasArr(msg, s.words.GREET)) return 'greet';
+  if(msg === 'Generic') return 'generic';
   return 'default';
 }
 
@@ -271,7 +232,7 @@ router.post('/webhook/', function (req, res) {
           if(has(text, 'all')) {
             sendAllCams(sender, num);
           } else {
-            sendImage(sender, 'https://fb.jagels.us/shot'+num[0]+'.jpg');
+            sendCam(sender, num[0]);
           }
         }
         break;
