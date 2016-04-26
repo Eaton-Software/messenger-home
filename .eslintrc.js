@@ -3,6 +3,9 @@ module.exports = {
     'es6': true,
     'node': true
   },
+  'plugins': [
+    'promise'
+  ],
   'extends': 'eslint:recommended',
   'parserOptions': {
     'sourceType': 'module'
