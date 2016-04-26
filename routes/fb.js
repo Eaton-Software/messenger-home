@@ -53,14 +53,14 @@ router.get('/webhook/', function (req, res) {
 
 function sendMessage(messageData, sender) {
   request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token:token},
-      method: 'POST',
-      json: {
-        recipient: {id:sender},
-        message: messageData
-      }
-    }, function(error, response, body) {
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData
+    }
+  }, function(error, response, body) {
     if (error) {
       logger.error('Error sending messages: ', error);
     } else if (response.body.error) {
@@ -138,16 +138,16 @@ function sendGeneric(sender) {
           'subtitle': 'Element #1 of an hscroll',
           'image_url': 'http://messengerdemo.parseapp.com/img/rift.png',
           'buttons': [
-              {
-                'type': 'web_url',
-                'url': 'https://www.messenger.com',
-                'title': 'web url'
-              },
-              {
-                'type': 'postback',
-                'title': 'Postback',
-                'payload': 'Payload for first element in a generic bubble'
-              }
+            {
+              'type': 'web_url',
+              'url': 'https://www.messenger.com',
+              'title': 'web url'
+            },
+            {
+              'type': 'postback',
+              'title': 'Postback',
+              'payload': 'Payload for first element in a generic bubble'
+            }
             ]
           },
           {
