@@ -1,7 +1,7 @@
 {
   "name": "hackdfw16",
   "version": "0.2.0",
-  "authors": [
+  "contributors": [
     "Tim Hung <thung1@binghamton.edu",
     "William Jagels <will.jagels@gmail.com>",
     "Nikolas Vanderhoof <nvander1@binghamton.edu"
@@ -9,6 +9,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "postinstall": "bower install",
     "start": "node ./bin/www",
     "lint": "gulp lint",
     "bithound": "bithound check git@github.com:Eaton-Software/messenger-home.git",
@@ -27,10 +28,21 @@
   },
   "devDependencies": {
     "bithound": "^1.2.0",
+    "bower": "^1.7.9",
     "eslint": "^2.8.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
     "mocha": "^2.4.5"
-  }
+  },
+  "description": "A bot created with the Facebook messenger API that helps automate your home.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eaton-Software/messenger-home.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eaton-Software/messenger-home/issues"
+  },
+  "homepage": "https://github.com/Eaton-Software/messenger-home#readme"
 }
