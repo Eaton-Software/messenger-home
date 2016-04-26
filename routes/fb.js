@@ -148,8 +148,8 @@ function sendGeneric(sender) {
               'title': 'Postback',
               'payload': 'Payload for first element in a generic bubble'
             }
-            ]
-          },
+          ]
+        },
           {
             'title': 'Second card',
             'subtitle': 'Element #2 of an hscroll',
