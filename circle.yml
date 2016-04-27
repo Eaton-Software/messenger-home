@@ -3,13 +3,11 @@ machine:
         - docker
     node:
         version: stable
-dependencies:
-  override:
-    - docker info
-    - docker build -t wijagels/messenger-home .
 deployment:
     hub:
         branch: scripts
         commands:
+            - docker info
+            - docker build -t wijagels/messenger-home .
             - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
             - docker push wijagels/messenger-home
