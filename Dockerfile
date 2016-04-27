@@ -1,4 +1,4 @@
-FROM node:5
+FROM node:6
 RUN useradd -ms /bin/bash node
 RUN mkdir -p /usr/src/app
 RUN chown -R node /usr/src/app
