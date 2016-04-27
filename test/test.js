@@ -13,4 +13,11 @@ describe('loading express', function () {
     .get('/bot/cam')
     .expect(200, done);
   });
+  it('responds to webhooks', function testVerify(done) {
+    request(server)
+    .get('/bot/webhook')
+    .query({'hub.verify_token': 'eleven_eaton_pl'})
+    .query({'hub.challenge': 'give_me_this'})
+    .expect('give_me_this', done);
+  });
 });

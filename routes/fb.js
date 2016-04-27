@@ -38,10 +38,11 @@ router.post('/pic/:num', upload.single('webcam'), function(req, res) {
 
 // for Facebook verification
 router.get('/webhook/', function (req, res) {
-  if (req.query['hub.verify_token'] === 'eleven_eaton_pl') {
+  if ('hub.verify_token' in req.query && 'hub.challenge' in req.query && req.query['hub.verify_token'] === 'eleven_eaton_pl') {
     res.send(req.query['hub.challenge']);
+  } else {
+    res.status(400).send('Error, wrong token');
   }
-  res.send('Error, wrong token');
 });
 
 

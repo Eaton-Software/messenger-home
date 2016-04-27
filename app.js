@@ -51,10 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/bot', fb);
 
-app.use(expressWinston.errorLogger({
-  winstonInstance: logger
-}));
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
