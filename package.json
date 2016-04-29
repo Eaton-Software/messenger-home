@@ -1,7 +1,7 @@
 {
   "name": "hackdfw16",
   "version": "0.2.0",
-  "authors": [
+  "contributors": [
     "Tim Hung <thung1@binghamton.edu",
     "William Jagels <will.jagels@gmail.com>",
     "Nikolas Vanderhoof <nvander1@binghamton.edu"
@@ -9,13 +9,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "postinstall": "bower install",
     "start": "node ./bin/www",
     "lint": "gulp lint",
     "bithound": "bithound check git@github.com:Eaton-Software/messenger-home.git",
-    "test": "exit 0"
+    "test": "gulp test",
+    "circletest": "mocha --reporter mocha-circleci-reporter test/test.js"
   },
   "dependencies": {
     "body-parser": "~1.15.0",
+    "bower": "^1.7.9",
     "cookie-parser": "~1.4.1",
     "ejs": "^2.4.1",
     "express": "~4.13.1",
@@ -27,10 +30,25 @@
   },
   "devDependencies": {
     "bithound": "^1.2.0",
+    "chai": "^3.5.0",
     "eslint": "^2.8.0",
+    "eslint-plugin-mocha": "^2.2.0",
+    "eslint-plugin-promise": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
-    "mocha": "^2.4.5"
-  }
+    "mocha": "^2.4.5",
+    "mocha-circleci-reporter": "0.0.1",
+    "supertest": "^1.2.0"
+  },
+  "description": "A bot created with the Facebook messenger API that helps automate your home.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eaton-Software/messenger-home.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eaton-Software/messenger-home/issues"
+  },
+  "homepage": "https://github.com/Eaton-Software/messenger-home#readme"
 }

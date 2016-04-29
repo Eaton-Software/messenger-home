@@ -86,3 +86,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
 }
+
+module.exports = server;

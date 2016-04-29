@@ -1,0 +1,6 @@
+messenger-home:
+    build: .
+    ports:
+        - "3000:3000"
+    env_file:
+        - keys.env

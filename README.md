@@ -1,4 +1,10 @@
 # Home automation at the tips of your fingers through Facebook messenger
+[![Circle CI](https://circleci.com/gh/Eaton-Software/messenger-home.svg?style=svg)](https://circleci.com/gh/Eaton-Software/messenger-home)
+[![Circle CI](https://circleci.com/gh/Eaton-Software/messenger-home/tree/develop.svg?style=svg)](https://circleci.com/gh/Eaton-Software/messenger-home/tree/develop)
+[![Build Status](https://travis-ci.org/Eaton-Software/messenger-home.svg?branch=develop)](https://travis-ci.org/Eaton-Software/messenger-home)
+[![bitHound Overall Score](https://www.bithound.io/github/Eaton-Software/messenger-home/badges/score.svg)](https://www.bithound.io/github/Eaton-Software/messenger-home)
+[![bitHound Dependencies](https://www.bithound.io/github/Eaton-Software/messenger-home/badges/dependencies.svg)](https://www.bithound.io/github/Eaton-Software/messenger-home/master/dependencies/npm)
+
 A bot created with the Facebook messenger API that helps automate your home.
 
 ----
